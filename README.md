@@ -67,8 +67,9 @@ If this is your first Zigbee device, these guides walk through setup:
 
 ### 3. Basic YAML comfort
 
-You'll need to copy files and edit a few entity IDs in YAML. You don't need to write YAML from scratch — just find-and-replace some placeholder values. If you've never touched YAML before:
+You'll need to copy files and add 3 lines to your `secrets.yaml`. You don't need to write YAML from scratch. If you've never touched YAML before:
 - [HA's YAML intro](https://www.home-assistant.io/docs/configuration/yaml/) — syntax basics
+- [HA secrets.yaml guide](https://www.home-assistant.io/docs/configuration/secrets/) — how HA's `!secret` system works
 - [File Editor add-on](https://www.home-assistant.io/common-tasks/os/#installing-and-using-the-file-editor-add-on) — edit config files right in your browser (no SSH needed)
 
 ---
@@ -237,23 +238,48 @@ flowchart LR
 
 ## Step-by-Step Installation
 
-### Step 1: Set up the packages directory
+### Step 1: Add your device IDs to `secrets.yaml`
 
-Home Assistant's [packages feature](https://www.home-assistant.io/docs/configuration/packages/) lets you keep all related configuration (sensors, automations, inputs) in a single file instead of splitting them across multiple config files. This project uses a package.
+This is the only configuration you need to do. The package file reads these values automatically using Home Assistant's built-in [`!secret`](https://www.home-assistant.io/docs/configuration/secrets/) system.
 
-**1a.** Open your Home Assistant config directory. If you're using the [File Editor add-on](https://www.home-assistant.io/common-tasks/os/#installing-and-using-the-file-editor-add-on), click the folder icon in the left sidebar. If you're using SSH or Samba, navigate to `/config/`.
+**1a. Find your entity IDs.** In Home Assistant, go to **[Developer Tools → States](https://my.home-assistant.io/redirect/developer_states/)** and search for your temperature sensor, humidity sensor, and hood switch. Entity IDs look like `sensor.kitchen_temperature`.
 
-**1b.** Create a `packages` folder if it doesn't exist:
+**1b. Open `secrets.yaml`.** This file lives at `/config/secrets.yaml`. If it doesn't exist, create it. You can edit it with the [File Editor add-on](https://www.home-assistant.io/common-tasks/os/#installing-and-using-the-file-editor-add-on), SSH, or Samba.
+
+**1c. Add these 3 lines** (replacing the example values with your actual entity IDs):
+
+```yaml
+hood_temperature_sensor: sensor.YOUR_TEMPERATURE_SENSOR
+hood_humidity_sensor: sensor.YOUR_HUMIDITY_SENSOR
+hood_switch: switch.YOUR_HOOD_SWITCH
+```
+
+A full example with real entity IDs:
+
+```yaml
+hood_temperature_sensor: sensor.third_reality_kitchen_temperature
+hood_humidity_sensor: sensor.third_reality_kitchen_humidity
+hood_switch: switch.switchbot_range_hood
+```
+
+> You can also copy [`secrets_example.yaml`](secrets_example.yaml) from this repo as a starting point.
+
+### Step 2: Set up the packages directory
+
+Home Assistant's [packages feature](https://www.home-assistant.io/docs/configuration/packages/) lets you keep all related configuration in a single file. This project uses a package so you only need to drop in one file.
+
+**2a.** Create a `packages` folder in your config directory if it doesn't exist:
 
 ```
 /config/
 ├── configuration.yaml
-├── packages/              <-- create this folder
-│   └── hood_vent_package.yaml   <-- you'll put the file here
+├── secrets.yaml              <-- you just edited this
+├── packages/                 <-- create this folder
+│   └── hood_vent_package.yaml
 └── ...
 ```
 
-**1c.** Open `configuration.yaml` and add the packages include. If you already have a `homeassistant:` section, just add the `packages:` lines under it:
+**2b.** Open `configuration.yaml` and add the packages include. If you already have a `homeassistant:` section, just add the `packages:` lines under it:
 
 ```yaml
 homeassistant:
@@ -261,31 +287,19 @@ homeassistant:
     hood_vent: !include packages/hood_vent_package.yaml
 ```
 
-> **Not sure how to edit configuration.yaml?** See [Editing the config](https://www.home-assistant.io/docs/configuration/) in the HA docs, or install the [File Editor add-on](https://www.home-assistant.io/common-tasks/os/#installing-and-using-the-file-editor-add-on) for a browser-based editor.
+> **Not sure how to edit configuration.yaml?** See [Editing the config](https://www.home-assistant.io/docs/configuration/) in the HA docs.
 
-### Step 2: Copy the package file
+### Step 3: Copy the package file
 
 Download [`hood_vent_package.yaml`](hood_vent_package.yaml) from this repo and place it in your `/config/packages/` directory.
 
-### Step 3: Replace the placeholder entity IDs
-
-Open `hood_vent_package.yaml` and find-and-replace three placeholder values with your actual entity IDs.
-
-**How to find your entity IDs:** In Home Assistant, go to **[Developer Tools → States](https://my.home-assistant.io/redirect/developer_states/)** and search for your devices. Entity IDs look like `sensor.kitchen_temperature_humidity_temperature`.
-
-| Find this placeholder | Replace with | Example |
-|----------------------|--------------|---------|
-| `sensor.YOUR_TEMPERATURE_SENSOR` | Your Zigbee temp sensor entity | `sensor.third_reality_kitchen_temperature` |
-| `sensor.YOUR_HUMIDITY_SENSOR` | Your Zigbee humidity sensor entity | `sensor.third_reality_kitchen_humidity` |
-| `switch.YOUR_HOOD_SWITCH` | Your SwitchBot or smart switch entity | `switch.switchbot_range_hood` |
-
-> **Tip:** Use your editor's find-and-replace (Ctrl+H / Cmd+H) to catch all instances at once. Each placeholder appears multiple times.
+**You don't need to edit this file.** It pulls your device IDs from `secrets.yaml` automatically.
 
 ### Step 4: Restart Home Assistant
 
-Go to **[Settings → System → Restart](https://my.home-assistant.io/redirect/server_controls/)** and click "Restart." This loads your new package.
+Go to **[Settings → System → Restart](https://my.home-assistant.io/redirect/server_controls/)** and click "Restart."
 
-After restart, verify the new entities exist by going to **Developer Tools → States** and searching for `kitchen_temp` — you should see the derivative and rate-of-change sensors.
+After restart, verify everything loaded by going to **Developer Tools → States** and searching for `kitchen_temp` — you should see the derivative and rate-of-change sensors.
 
 ### Step 5: Enable the automation
 
@@ -295,7 +309,7 @@ Go to **[Settings → Automations](https://my.home-assistant.io/redirect/automat
 - Hood Vent: Detect Manual Override
 - Hood Vent: Safety Auto Off (Max Runtime)
 
-Make sure `input_boolean.hood_automation_enabled` is turned **on** (you can toggle it from **Developer Tools → States** or from the dashboard card you'll add next).
+Toggle `input_boolean.hood_automation_enabled` to **on** (via Developer Tools → States or the dashboard card you'll add next).
 
 ---
 
@@ -351,10 +365,10 @@ If you want the enhanced graphs:
 
 ### Step 2: Add the card
 
-1. Download [`lovelace_card.yaml`](lovelace_card.yaml) from this repo
-2. In your HA dashboard, click **Edit** (pencil icon top-right) → **Add Card** → scroll down to **Manual**
-3. Paste the card YAML
-4. **Find-and-replace** the same three placeholders you updated earlier (`YOUR_TEMPERATURE_SENSOR`, `YOUR_HUMIDITY_SENSOR`, `YOUR_HOOD_SWITCH`)
+1. Open [`lovelace_card.yaml`](lovelace_card.yaml) from this repo
+2. **Find-and-replace** the 3 placeholder entity IDs with the same values you put in `secrets.yaml` (`!secret` doesn't work in the dashboard UI editor, so this is the one file where you do a manual replacement)
+3. In your HA dashboard, click **Edit** (pencil icon top-right) → **Add Card** → scroll down to **Manual**
+4. Paste the updated YAML
 5. Save
 
 > **New to dashboards?** See [HA's dashboard guide](https://www.home-assistant.io/dashboards/) for the basics.
@@ -404,11 +418,12 @@ Every kitchen is different — sensor distance from the stove, ventilation, stov
 
 ## File Reference
 
-| File | What it does |
-|------|-------------|
-| [`hood_vent_package.yaml`](hood_vent_package.yaml) | All the HA configuration — sensors, automations, input controls — in one [package](https://www.home-assistant.io/docs/configuration/packages/) file |
-| [`lovelace_card.yaml`](lovelace_card.yaml) | Dashboard card with controls, graphs, and tuning sliders |
-| [`docs/images/`](docs/images/) | Product photos used in this README (add your own) |
+| File | What it does | Edit needed? |
+|------|-------------|--------------|
+| [`secrets_example.yaml`](secrets_example.yaml) | Template for the 3 entity IDs you add to your HA `secrets.yaml` | **Yes** — copy these lines into your `secrets.yaml` |
+| [`hood_vent_package.yaml`](hood_vent_package.yaml) | All the HA configuration — sensors, automations, input controls — in one [package](https://www.home-assistant.io/docs/configuration/packages/) file | **No** — reads from `secrets.yaml` automatically |
+| [`lovelace_card.yaml`](lovelace_card.yaml) | Dashboard card with controls, graphs, and tuning sliders | **Yes** — replace 3 entity IDs before pasting |
+| [`docs/images/`](docs/images/) | Product photos used in this README | No |
 
 ---
 
@@ -453,7 +468,7 @@ Every kitchen is different — sensor distance from the stove, ventilation, stov
 
 1. **Check for YAML errors.** Go to **Developer Tools → YAML** and click "Check Configuration." Fix any errors before restarting.
 2. **Verify the package include.** Make sure your `configuration.yaml` has the `packages:` section under `homeassistant:` and the path matches where you put the file.
-3. **Check the entity IDs.** If your temperature sensor's entity ID was entered wrong, the derivative sensor will appear but show "unavailable." Double-check spelling in `hood_vent_package.yaml`.
+3. **Check your secrets.yaml.** If an entity ID is misspelled in `secrets.yaml`, the derivative sensor will appear but show "unavailable." Double-check the spelling of all three values.
 </details>
 
 ---

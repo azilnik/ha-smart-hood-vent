@@ -1,21 +1,25 @@
-# Hood Vent Control Dashboard Card
-# =================================
-# Copy this into your dashboard via Edit Dashboard → Add Card → Manual
+# Hood Vent Dashboard Card
+# ========================
 #
-# REQUIRED: Replace these entity IDs with your actual entities:
-#   - sensor.YOUR_TEMPERATURE_SENSOR
-#   - sensor.YOUR_HUMIDITY_SENSOR
-#   - switch.YOUR_HOOD_SWITCH
+# BEFORE PASTING: Find-and-replace these 3 values with your entity IDs.
+# Use the same values you added to secrets.yaml.
 #
-# OPTIONAL: Install mini-graph-card from HACS for better rate-of-change visualization
+#   FIND                              → REPLACE WITH YOUR ENTITY
+#   sensor.YOUR_TEMPERATURE_SENSOR    → (e.g., sensor.kitchen_temperature)
+#   sensor.YOUR_HUMIDITY_SENSOR       → (e.g., sensor.kitchen_humidity)
+#   switch.YOUR_HOOD_SWITCH           → (e.g., switch.switchbot_range_hood)
+#
+# Then paste into: Dashboard → Edit → Add Card → Manual
+#
+# NOTE: Requires mini-graph-card from HACS. If you don't have HACS,
+# use the simple version at the bottom of this file instead.
 
 type: vertical-stack
 cards:
-  # Header with main controls
   - type: horizontal-stack
     cards:
       - type: entity
-        entity: switch.YOUR_HOOD_SWITCH  # ← CHANGE THIS
+        entity: switch.YOUR_HOOD_SWITCH
         name: Hood Vent
         icon: mdi:fan
       - type: entity
@@ -25,21 +29,18 @@ cards:
         entity: input_boolean.hood_automation_enabled
         name: Auto Mode
 
-  # Current readings
   - type: glance
     title: Current Readings
     entities:
-      - entity: sensor.YOUR_TEMPERATURE_SENSOR  # ← CHANGE THIS
+      - entity: sensor.YOUR_TEMPERATURE_SENSOR
         name: Temp
-      - entity: sensor.YOUR_HUMIDITY_SENSOR  # ← CHANGE THIS
+      - entity: sensor.YOUR_HUMIDITY_SENSOR
         name: Humidity
       - entity: sensor.kitchen_temp_rate_of_change
         name: Temp Δ/min
       - entity: sensor.kitchen_humidity_rate_of_change
         name: Humidity Δ/min
 
-  # Rate of change graph - THE KEY TUNING TOOL
-  # Requires mini-graph-card from HACS
   - type: custom:mini-graph-card
     name: Rate of Change (for tuning thresholds)
     hours_to_show: 2
@@ -48,15 +49,15 @@ cards:
     entities:
       - entity: sensor.kitchen_temp_rate_of_change
         name: Temp °/min
-        color: '#ff6b6b'
+        color: "#ff6b6b"
         show_fill: false
       - entity: sensor.kitchen_humidity_rate_of_change
         name: Humidity %/min
-        color: '#4ecdc4'
+        color: "#4ecdc4"
         show_fill: false
       - entity: input_number.hood_temp_rise_threshold
         name: ON Threshold
-        color: '#ffe66d'
+        color: "#ffe66d"
         show_line: true
         show_points: false
         show_fill: false
@@ -64,7 +65,6 @@ cards:
       labels: true
       legend: true
 
-  # Standard history graph (works without HACS)
   - type: history-graph
     title: Derivative Values (Last 2 Hours)
     hours_to_show: 2
@@ -74,17 +74,15 @@ cards:
       - entity: sensor.kitchen_humidity_rate_of_change
         name: Humidity Δ/min
 
-  # Absolute values graph for reference
   - type: history-graph
     title: Absolute Temperature & Humidity
     hours_to_show: 4
     entities:
-      - entity: sensor.YOUR_TEMPERATURE_SENSOR  # ← CHANGE THIS
+      - entity: sensor.YOUR_TEMPERATURE_SENSOR
         name: Temperature
-      - entity: sensor.YOUR_HUMIDITY_SENSOR  # ← CHANGE THIS
+      - entity: sensor.YOUR_HUMIDITY_SENSOR
         name: Humidity
 
-  # Tuning controls
   - type: entities
     title: Tuning Thresholds
     show_header_toggle: false
@@ -106,57 +104,56 @@ cards:
       - entity: input_boolean.hood_automation_enabled
       - entity: input_boolean.hood_manual_override
 
-  # Recent automation activity
   - type: logbook
     title: Hood Vent Activity Log
     hours_to_show: 12
     entities:
-      - switch.YOUR_HOOD_SWITCH  # ← CHANGE THIS
+      - switch.YOUR_HOOD_SWITCH
       - binary_sensor.stove_activity_detected
       - automation.hood_vent_auto_on
       - automation.hood_vent_auto_off
 
 
----
 # ============================================================================
-# ALTERNATIVE: Simple card without HACS dependencies
+# SIMPLE VERSION (no HACS required)
 # ============================================================================
-# Use this version if you don't have mini-graph-card installed
-
-type: vertical-stack
-cards:
-  - type: entities
-    title: Hood Vent Control
-    entities:
-      - entity: switch.YOUR_HOOD_SWITCH  # ← CHANGE THIS
-        name: Hood Vent
-      - entity: binary_sensor.stove_activity_detected
-        name: Stove Activity
-      - entity: input_boolean.hood_automation_enabled
-        name: Automation Enabled
-      - type: divider
-      - entity: sensor.YOUR_TEMPERATURE_SENSOR  # ← CHANGE THIS
-        name: Temperature
-        secondary_info: last-updated
-      - entity: sensor.kitchen_temp_rate_of_change
-        name: Temp Rate (°/min)
-      - entity: sensor.YOUR_HUMIDITY_SENSOR  # ← CHANGE THIS
-        name: Humidity
-        secondary_info: last-updated
-      - entity: sensor.kitchen_humidity_rate_of_change
-        name: Humidity Rate (%/min)
-
-  - type: history-graph
-    title: Rate of Change Trends
-    hours_to_show: 2
-    entities:
-      - sensor.kitchen_temp_rate_of_change
-      - sensor.kitchen_humidity_rate_of_change
-
-  - type: entities
-    title: Adjust Thresholds
-    entities:
-      - input_number.hood_temp_rise_threshold
-      - input_number.hood_humidity_rise_threshold
-      - input_number.hood_temp_fall_threshold
-      - input_number.hood_off_delay_minutes
+# If you don't have mini-graph-card, use this version instead.
+# Same find-and-replace applies.
+#
+# type: vertical-stack
+# cards:
+#   - type: entities
+#     title: Hood Vent Control
+#     entities:
+#       - entity: switch.YOUR_HOOD_SWITCH
+#         name: Hood Vent
+#       - entity: binary_sensor.stove_activity_detected
+#         name: Stove Activity
+#       - entity: input_boolean.hood_automation_enabled
+#         name: Automation Enabled
+#       - type: divider
+#       - entity: sensor.YOUR_TEMPERATURE_SENSOR
+#         name: Temperature
+#         secondary_info: last-updated
+#       - entity: sensor.kitchen_temp_rate_of_change
+#         name: Temp Rate (°/min)
+#       - entity: sensor.YOUR_HUMIDITY_SENSOR
+#         name: Humidity
+#         secondary_info: last-updated
+#       - entity: sensor.kitchen_humidity_rate_of_change
+#         name: Humidity Rate (%/min)
+#
+#   - type: history-graph
+#     title: Rate of Change Trends
+#     hours_to_show: 2
+#     entities:
+#       - sensor.kitchen_temp_rate_of_change
+#       - sensor.kitchen_humidity_rate_of_change
+#
+#   - type: entities
+#     title: Adjust Thresholds
+#     entities:
+#       - input_number.hood_temp_rise_threshold
+#       - input_number.hood_humidity_rise_threshold
+#       - input_number.hood_temp_fall_threshold
+#       - input_number.hood_off_delay_minutes
