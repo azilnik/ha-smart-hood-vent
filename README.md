@@ -111,7 +111,7 @@ Unless your hood vent is already wired into a smart switch, you need a physical 
 
 <table>
   <tr>
-    <td width="140"><img src="docs/images/switchbot-bot.png" width="120" alt="SwitchBot Bot"/></td>
+    <td width="140"><img src="docs/images/switchbot-bot.jpg" width="120" alt="SwitchBot Bot"/></td>
     <td>
       <strong><a href="https://www.amazon.com/SwitchBot-switch-button-controlled-compatible/dp/B07B7NXV4R">SwitchBot Bot</a></strong><br/>
       A tiny motorized arm that physically presses buttons. Sticks onto your hood with adhesive — no wiring, no modification to your hood.<br/>
@@ -119,7 +119,7 @@ Unless your hood vent is already wired into a smart switch, you need a physical 
     </td>
   </tr>
   <tr>
-    <td width="140"><img src="docs/images/switchbot-hub.png" width="120" alt="SwitchBot Hub"/></td>
+    <td width="140"><img src="docs/images/switchbot-hub.jpg" width="120" alt="SwitchBot Hub"/></td>
     <td>
       <strong><a href="https://www.amazon.com/SwitchBot-Thermometer-Hygrometer-Bluetooth-Temperature/dp/B07TTH451R">SwitchBot Hub Mini</a></strong><br/>
       The Bot communicates over Bluetooth, but the Hub bridges it to your Wi-Fi network so Home Assistant can control it. You need one Hub for all your SwitchBot devices.<br/>
@@ -148,7 +148,7 @@ This is the "radio" that lets Home Assistant talk to your Zigbee sensor. If you 
 
 <table>
   <tr>
-    <td width="140"><img src="docs/images/slzb-06.png" width="120" alt="SMLIGHT SLZB-06"/></td>
+    <td width="140"><img src="docs/images/slzb-06.jpg" width="120" alt="SMLIGHT SLZB-06"/></td>
     <td>
       <strong><a href="https://www.amazon.com/SMLIGHT-SLZB-06-Coordinator-Zigbee2MQTT-Assistant/dp/B0BL6DQSB3">SMLIGHT SLZB-06</a></strong><br/>
       Connects over Ethernet, USB, or Wi-Fi. Supports PoE. Can be placed anywhere in your house for best Zigbee coverage — doesn't need to be plugged into the HA server directly.<br/>

@@ -1,12 +1,10 @@
 # Product Images
 
-Add the following product photos to this directory. The main README references these filenames:
+These images are referenced by the main README.
 
-| Filename | What to add |
-|----------|-------------|
-| `third-reality-sensor.png` | Third Reality Zigbee Temperature & Humidity Sensor product photo |
-| `switchbot-bot.png` | SwitchBot Bot product photo |
-| `switchbot-hub.png` | SwitchBot Hub Mini product photo |
-| `slzb-06.png` | SMLIGHT SLZB-06 coordinator product photo |
-
-Recommended: square-ish images, at least 240px wide. PNG or JPG both work.
+| File | Source |
+|------|--------|
+| `third-reality-sensor.png` | [Blakadder Zigbee device database](https://zigbee.blakadder.com/) |
+| `switchbot-bot.jpg` | [SwitchBot product page](https://www.switch-bot.com/products/switchbot-bot) |
+| `switchbot-hub.jpg` | [SwitchBot product page](https://www.switch-bot.com/products/switchbot-hub-mini) |
+| `slzb-06.jpg` | [SMLIGHT product page](https://smlight.tech/product/slzb-06/) |
