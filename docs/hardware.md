@@ -8,11 +8,11 @@ This is the "eyes" of the automation — it detects cooking activity by measurin
 
 <table>
   <tr>
-    <td width="140"><img src="images/third-reality-sensor.png" width="120" alt="Third Reality Zigbee Temperature & Humidity Sensor"/></td>
+    <td width="140"><img src="images/third-reality-sensor-lite.jpg" width="120" alt="Third Reality Zigbee Temperature & Humidity Sensor Lite"/></td>
     <td>
-      <strong><a href="https://www.amazon.com/THIRDREALITY-Zigbee-Temperature-Humidity-Sensor/dp/B0BN32XX24">Third Reality Zigbee Temperature & Humidity Sensor</a></strong><br/>
-      Reports temperature and humidity over Zigbee. Compact, battery-powered, easy to mount near the stove. Has a small LCD screen so you can glance at the reading.<br/>
-      <strong>~$20</strong>
+      <strong><a href="https://www.amazon.com/THIRDREALITY-Temperature-Humidity-Sensor-Lite/dp/B0F6CKHHDV">Third Reality Zigbee Temperature & Humidity Sensor Lite</a></strong><br/>
+      Reports temperature and humidity over Zigbee. Compact, battery-powered, easy to mount near the stove. Same accuracy as the full-size model at a lower price — you don't need the LCD screen for this automation.<br/>
+      <strong>~$15</strong>
     </td>
   </tr>
 </table>
@@ -23,7 +23,7 @@ This is the "eyes" of the automation — it detects cooking activity by measurin
 
 | Sensor | Notes | Price |
 |--------|-------|-------|
-| [Third Reality Sensor Lite](https://www.amazon.com/THIRDREALITY-Temperature-Humidity-Sensor-Lite/dp/B0F6CKHHDV) | Same accuracy, no LCD screen | ~$15 |
+| [Third Reality Sensor (with LCD)](https://www.amazon.com/THIRDREALITY-Zigbee-Temperature-Humidity-Sensor/dp/B0BN32XX24) | Same sensor with a small LCD screen for at-a-glance readings | ~$20 |
 | [SONOFF SNZB-02](https://www.amazon.com/SONOFF-SNZB-02-Temperature-Humidity-Sensor/dp/B08BCHRH1P) | Very compact, wide HA support | ~$12 |
 
 Any Zigbee temperature sensor that reports to HA will work. The key is frequent reporting intervals (ideally every 30–60 seconds).
@@ -99,11 +99,11 @@ For help choosing, see the [Zigbee coordinator comparison](https://www.zigbee2mq
 
 | Item | Price |
 |------|-------|
-| Temperature sensor | ~$20 |
+| Temperature sensor | ~$15 |
 | SwitchBot Bot | ~$30 |
 | SwitchBot Hub Mini | ~$40 |
 | Zigbee coordinator (if needed) | ~$25–45 |
-| **Total** | **~$90–135** |
+| **Total** | **~$85–130** |
 
 One-time purchase. No subscriptions. Everything runs locally.
 

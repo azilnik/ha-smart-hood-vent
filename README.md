@@ -12,6 +12,10 @@
 
 ---
 
+## Why This Exists
+
+Gas stoves [put out real pollutants](https://rmi.org/insight/gas-stoves-pollution-health) (NO2, CO, particulates), and the fix is just turning on your range hood. Problem is, I forget. [Most people do.](https://doi.org/10.1111/ina.12906) I have two small kids and read too many air quality studies, so I did the obvious thing and automated my range hood.
+
 ## How It Works
 
 Most smart hood setups wait for your kitchen to hit a temperature threshold before kicking in. By then you've been cooking for 10 minutes. And when you stop, residual heat keeps the hood running long after.
@@ -23,9 +27,9 @@ This package watches the **rate of change** instead — how *fast* the temperatu
 ## What You Need
 
 - **Home Assistant** up and running ([getting started guide](https://www.home-assistant.io/getting-started/))
-- A **Zigbee temperature sensor** near your stove (~$15–20)
-- A **SwitchBot Bot + Hub** to press your hood's button (~$70), *or* a smart switch if your hood is hardwired
-- A **Zigbee coordinator** if you don't already have one (~$25–45)
+- A [**Zigbee temperature sensor**](https://www.amazon.com/THIRDREALITY-Temperature-Humidity-Sensor-Lite/dp/B0F6CKHHDV) near your stove (~$15)
+- A [**SwitchBot Bot**](https://www.amazon.com/SwitchBot-switch-button-controlled-compatible/dp/B07B7NXV4R) + [**Hub Mini**](https://www.amazon.com/SwitchBot-Thermometer-Hygrometer-Bluetooth-Temperature/dp/B07TTH451R) to press your hood's button (~$70), *or* a smart switch if your hood is hardwired
+- A [**Zigbee coordinator**](https://www.amazon.com/SMLIGHT-SLZB-06-Coordinator-Zigbee2MQTT-Assistant/dp/B0BL6DQSB3) if you don't already have one (~$25–45)
 
 > Full hardware recommendations with links and alternatives: [Hardware Guide](docs/hardware.md)
 
