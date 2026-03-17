@@ -22,7 +22,17 @@ Most smart hood setups wait for your kitchen to hit a temperature threshold befo
 
 This package watches the **rate of change** instead — how *fast* the temperature is rising or falling. Your hood turns on within 30–60 seconds of starting to cook and off within 2–3 minutes of stopping.
 
-> Want the technical details? See [How It Works](docs/how-it-works.md).
+<p align="center">
+  <img src="docs/images/dashboard-cooking-session.png" alt="Dashboard showing hood turning on automatically when cooking is detected via temperature rate of change" width="700"/>
+</p>
+
+Reading the dashboard top to bottom:
+
+1. **Hood state** (top bar) — off, then on (yellow), then off again
+2. **Temperature rate of change** (middle graph) — the derivative. Flat at zero when idle, spikes when cooking starts, drops back when you stop. This is what triggers the hood.
+3. **Raw temperature** (bottom graph) — climbs from ~20°C to ~35°C during cooking. A threshold-based system would wait for this to cross some number. Rate of change catches it 10x faster by watching the *slope*, not the value.
+
+> Want the full technical breakdown? See [How It Works](docs/how-it-works.md).
 
 ## What You Need
 

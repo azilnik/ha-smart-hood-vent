@@ -38,6 +38,14 @@ flowchart LR
     style HOFF fill:#e74c3c,color:#fff
 ```
 
+### Real-World Example
+
+Here's what an actual cooking session looks like on the dashboard:
+
+![Dashboard showing a cooking session](images/dashboard-cooking-session.png)
+
+The top bar shows the hood state (off → on → off). The middle graph is the rate of change — notice the sharp spike around 12:55 PM when cooking starts. The bottom graph is raw temperature climbing from ~20°C to ~35°C. The hood turned on within about a minute of the rate spike and off shortly after it dropped.
+
 ## Why Rate of Change Works Better
 
 | Scenario | Threshold-based | Rate-of-change (this project) |

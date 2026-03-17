@@ -2,6 +2,8 @@
 
 The dashboard card gives you a control panel with current readings, rate-of-change graphs, and tuning sliders.
 
+![Dashboard card showing rate-of-change graphs and hood status](images/dashboard-cooking-session.png)
+
 ## Step 1: (Optional) Install mini-graph-card
 
 The full dashboard card uses [mini-graph-card](https://github.com/kalkih/mini-graph-card) from [HACS](https://hacs.xyz/) for rate-of-change visualization. This is optional — a simpler alternative card that works without HACS is included in the file.

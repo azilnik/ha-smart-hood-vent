@@ -16,6 +16,11 @@ Every kitchen is different — sensor distance from the stove, ventilation, stov
 1. **Turn off the automation** — toggle `input_boolean.hood_automation_enabled` to OFF
 2. **Cook something** — boil water, pan-fry, whatever you normally make
 3. **Watch the dashboard** — observe the "Temp Rate" and "Humidity Rate" values
+
+   Here's what a typical cooking session looks like — the rate-of-change graph (middle) is what you're tuning against:
+
+   ![Dashboard during a cooking session](images/dashboard-cooking-session.png)
+
 4. **Note the peaks** — during active cooking, temp rate is typically 0.3–1.0 °/min
 5. **Set the ON threshold** just below your observed peaks (e.g., if you see 0.6 °/min, set to 0.4)
 6. **Turn off the stove** and watch the rate drop — it usually falls near zero within a minute or two
