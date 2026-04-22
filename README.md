@@ -6,8 +6,8 @@
 
 <p align="center">
   <a href="https://www.home-assistant.io/"><img src="https://img.shields.io/badge/Home%20Assistant-2024.1+-blue?logo=homeassistant&logoColor=white" alt="Home Assistant 2024.1+"></a>
-  <a href="https://github.com/azilnik/ha-smart-hood-vent/blob/main/LICENSE"><img src="https://img.shields.io/github/license/azilnik/ha-smart-hood-vent" alt="MIT License"></a>
-  <a href="https://github.com/azilnik/ha-smart-hood-vent/stargazers"><img src="https://img.shields.io/github/stars/azilnik/ha-smart-hood-vent?style=flat" alt="Stars"></a>
+  <a href="https://github.com/azilnik/ha-hood-vent/blob/main/LICENSE"><img src="https://img.shields.io/github/license/azilnik/ha-hood-vent" alt="MIT License"></a>
+  <a href="https://github.com/azilnik/ha-hood-vent/stargazers"><img src="https://img.shields.io/github/stars/azilnik/ha-hood-vent?style=flat" alt="Stars"></a>
 </p>
 
 <p align="center">
